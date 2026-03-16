@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signin = () => {
 
@@ -42,6 +42,11 @@ const Signin = () => {
       if(response.data.user){
         // if user is there, definitely the details entered during signin are correct
         // setSuccess('Log in Successful')
+
+        // Store user details in local storage
+
+         localStorage.setItem("user", JSON.stringify(response.data.user));
+
         // If it is successful, let the user get redirected to another page
         navigate ("/");
       }
@@ -89,7 +94,9 @@ const Signin = () => {
 
           <input type="submit" 
           value="Sign in"
-          className='btn btn-primary' />
+          className='btn btn-primary' /> <br />
+
+          Don't have an account? <Link to={"/signup"}>Register</Link>
         </form>
 
       </div>
