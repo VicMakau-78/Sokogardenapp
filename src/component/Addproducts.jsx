@@ -46,6 +46,12 @@ const Addproducts = () => {
     setProductDescription("");
     setProductCost("");
     setProductPhoto("");
+
+    e.target.reset()
+
+    setTimeout(()=> {
+      setsuccess("");
+    },5000);
     }
 
     
