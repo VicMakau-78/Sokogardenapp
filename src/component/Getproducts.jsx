@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Loader from './Loader';
+import { useNavigate } from 'react-router-dom';
 
 const Getproducts = () => {
 
@@ -9,8 +10,11 @@ const Getproducts = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("");
 
+  // declare the navigate hook
+  const navigate = useNavigate()
+
   // below we specify the image base url
-  const img_url = "https://kbenkamotho.alwaysdata.net/static/images/"
+  const img_url = "https://vicmakau.alwaysdata.net/static/images/"
 
   // create a function that will help you fetch the products from your API
   const fetchproducts = async () =>{
@@ -19,7 +23,7 @@ const Getproducts = () => {
       setLoading(true)
 
        // Interact with your endpoint for fetching the endpoint
-      const response = await axios.get("https://kbenkamotho.alwaysdata.net/api/get_products")
+      const response = await axios.get("https://vicmakau.alwaysdata.net/api/get_product_details")
 
       // Update the products hook with the response given from the API
       setProducts(response.data)
@@ -64,10 +68,14 @@ const Getproducts = () => {
              className='product_img mt-3'  />
 
             <div className="card-body">
+
               <h5 className="text-primary"> {product.product_name} </h5>
+
               <p className="text-dark"> {product.product_description.slice(0, 70)}... </p>
 
               <h4 className="text-success">Ksh. {product.product_cost} </h4>
+
+              <button className="btn btn-outline-info" onClick={() => navigate("/makepayment", {state : {product}})}>Purchase Now</button>
             </div>
           </div>
         </div>
